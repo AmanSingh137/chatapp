@@ -1,4 +1,5 @@
 import LoginPage from "./LoginPage";
 import PostsPage from "./PostsPage";
 import ChatPage from "./ChatPage";
-export { LoginPage, PostsPage, ChatPage };
+import DefaultLayout from "./DefaultLayout";
+export { LoginPage, PostsPage, ChatPage, DefaultLayout };
