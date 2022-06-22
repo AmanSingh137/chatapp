@@ -28,6 +28,7 @@ export default Topbar;
 const TopbarStyles = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.6rem 1rem;
   background-color: ${(props) => props.theme.primaryColor};
   button {
