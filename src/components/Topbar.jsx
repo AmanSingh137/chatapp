@@ -9,7 +9,8 @@ const Topbar = () => {
   const navigate = useNavigate();
   return (
     <TopbarStyles>
-      <div>Topbar</div>
+      <h2>Topbar</h2>
+
       <button
         onClick={() => {
           dispatch(logout());
@@ -27,5 +28,12 @@ export default Topbar;
 const TopbarStyles = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 0.6rem 1rem;
+  background-color: ${(props) => props.theme.primaryColor};
+  button {
+    height: 3rem;
+    width: 5rem;
+    border-radius: 40px;
+    cursor: pointer;
+  }
 `;
