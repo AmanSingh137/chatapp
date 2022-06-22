@@ -29,7 +29,6 @@ const LoginPage = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
   return (
     <Loginpage>
-      {/* <img src="images/login.jpg"></img> */}
       <form className="Form" onSubmit={loginHandler}>
         <H2>Sign In</H2>
         <Input>
@@ -48,10 +47,11 @@ const LoginPage = () => {
 export default LoginPage;
 
 const Loginpage = styled.div`
-  //background-image: url("images/login.jpg");
+  background-image: url("/images/login.jpg");
+  background-size: cover;
+  box-sizing: border-box;
   width: 100%;
   height: 100vh;
-  background: lightyellow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,8 @@ const Loginpage = styled.div`
     padding: 100px;
     border: 1px solid blue;
     border-radius: 10px;
-    background: #0488bc;
+    background-color: rgba(0, 116, 217, 0.4);
+
     height: 200px;
   }
 `;
