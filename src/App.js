@@ -17,8 +17,7 @@ function App() {
               <Route path="/" element={<Navigate to={"/chats"} />} />
             )}
 
-            {/* <Route path="/" element={<Navigate to={"/chats"} />} /> */}
-            <Route path="/login" element={<LoginPage />}></Route>
+            {/* <Route path="/login" element={<LoginPage />}></Route> */}
             <Route path="/" element={<DefaultLayout />}>
               <Route path="/chats" element={<ChatPage />}></Route>
               <Route path="/posts" element={<PostsPage />}></Route>
