@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux/es/exports";
+import { setUser } from "../features/authSlice";
 
 const LoginPage = () => {
+  const distpatch = useDispatch();
   const [username, setUsername] = useState("");
-  const login = () => {};
+  const login = () => {
+    distpatch(setUser(username));
+  };
   return (
     <div>
       <form action="" onSubmit={login}>
