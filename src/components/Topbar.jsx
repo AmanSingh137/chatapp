@@ -38,11 +38,6 @@ const TopbarStyles = styled.div`
   align-items: center;
   padding: 0.6rem 1rem;
   background-color: ${(props) => props.theme.primaryColor};
-  div {
-    display: flex;
-    justify-content: space-between;
-    width: 12%;
-  }
 
   button {
     text-decoration: none;
@@ -50,5 +45,6 @@ const TopbarStyles = styled.div`
     width: 5rem;
     border-radius: 40px;
     cursor: pointer;
+    margin-left: 1rem;
   }
 `;
