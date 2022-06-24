@@ -10,7 +10,7 @@ const DefaultLayout = () => {
       <div className="content">
         <Outlet />
       </div>
-      <div className="footer">content</div>
+      {/* <div className="footer">content</div> */}
     </div>
   );
 };

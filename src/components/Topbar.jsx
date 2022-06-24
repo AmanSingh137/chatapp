@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logout, reset } from "../features/auth/authSlice";
 
@@ -10,16 +10,23 @@ const Topbar = () => {
   return (
     <TopbarStyles>
       <h2>Topbar</h2>
+      <div>
+        <button>
+          <Link to="/posts" style={{ textDecoration: "none" }}>
+            Posts
+          </Link>
+        </button>
 
-      <button
-        onClick={() => {
-          dispatch(logout());
-          dispatch(reset());
-          navigate("/login");
-        }}
-      >
-        Logout
-      </button>
+        <button
+          onClick={() => {
+            dispatch(logout());
+            dispatch(reset());
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
+      </div>
     </TopbarStyles>
   );
 };
@@ -31,7 +38,14 @@ const TopbarStyles = styled.div`
   align-items: center;
   padding: 0.6rem 1rem;
   background-color: ${(props) => props.theme.primaryColor};
+  div {
+    display: flex;
+    justify-content: space-between;
+    width: 12%;
+  }
+
   button {
+    text-decoration: none;
     height: 3rem;
     width: 5rem;
     border-radius: 40px;
