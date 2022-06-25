@@ -1,46 +1,34 @@
 import React, { useState } from "react";
-import styled from 'styled-components';
-import AddIcon from '@mui/icons-material/Add';
+import styled from "styled-components";
+import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import { setPosts } from "../features/postsSlice";
+import Post from "../components/Post";
+import styles from "../css/PostPage.module.css";
 
 const PostsPage = () => {
   const [postText, setPostsText] = useState("");
   const [images, setImages] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentPosts } = useSelector(
-    (store) => store.posts
-  );
+  const { currentPosts } = useSelector((store) => store.posts);
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(setPosts(
-      [ ...currentPosts]
-    ))
-  }
+    dispatch(setPosts([...currentPosts]));
+  };
 
   const handleClickAdd = (e) => {
     e.preventDefault();
+  };
 
-  }
-
-  return <>
-    <PostsBar>
-      <p>Post Here</p>
-      <input type="text" onChange={ (e) => {
-        setPostsText(e.target.value);
-      } } />
-      <PostOptions>
-        <Button onClick={handleClick}>
-          Post
-        </Button>
-        <AddIcon onClick={handleClickAdd} />
-      </PostOptions>
-    </PostsBar>
-  </>;
+  return (
+    <div className={styles.post_page}>
+      <Post></Post>
+    </div>
+  );
 };
 
 export default PostsPage;
@@ -68,7 +56,7 @@ const PostsBar = styled.div`
 const PostOptions = styled.div`
   margin-top: 50px;
   //background-color: red;
-  
+
   > button {
     background-color: green;
   }
