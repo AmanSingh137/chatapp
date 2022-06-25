@@ -9,7 +9,7 @@ const Topbar = () => {
   const navigate = useNavigate();
   return (
     <TopbarStyles>
-      <h2>Topbar</h2>
+      <h2>Campus</h2>
       <div>
         <button>
           <Link to="/posts" style={{ textDecoration: "none" }}>
@@ -38,6 +38,7 @@ const TopbarStyles = styled.div`
   align-items: center;
   padding: 0.6rem 1rem;
   background-color: ${(props) => props.theme.primaryColor};
+  border-bottom: 1px solid rgb(222, 215, 215);
 
   button {
     text-decoration: none;

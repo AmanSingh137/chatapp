@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { setPosts } from "../features/postsSlice";
 import Post from "../components/Post";
 import styles from "../css/PostPage.module.css";
+import PostSend from "../components/PostSend";
 
 const PostsPage = () => {
   const [postText, setPostsText] = useState("");
@@ -26,6 +27,10 @@ const PostsPage = () => {
 
   return (
     <div className={styles.post_page}>
+      <PostSend></PostSend>
+      <Post></Post>
+      <Post></Post>
+      <Post></Post>
       <Post></Post>
     </div>
   );

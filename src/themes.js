@@ -13,3 +13,11 @@ export const darkTheme = {
   secondary: "#5C5C5C",
   secondfontColor: "white",
 };
+
+export const lightThemeGaurav = {
+  backgroundColor: "rgb(254, 252, 240)",
+  fontColor: "white",
+  primaryColor: "rgb(254, 252, 240)",
+  secondary: "white",
+  secondfontColor: "black",
+};
