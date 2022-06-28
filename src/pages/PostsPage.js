@@ -1,37 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { useNavigate } from "react-router-dom";
-import { setPosts } from "../features/postsSlice";
-import Post from "../components/Post";
 import styles from "../css/PostPage.module.css";
 import PostSend from "../components/PostSend";
+import {
+  ref,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
+import { storage } from "../firebase";
 
 const PostsPage = () => {
-  const [postText, setPostsText] = useState("");
-  const [images, setImages] = useState(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { currentPosts } = useSelector((store) => store.posts);
+  const [imgUrls, setImgUrls] = useState([]);
+  const [textUrls, setTextUrls] = useState([]);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    dispatch(setPosts([...currentPosts]));
-  };
-
-  const handleClickAdd = (e) => {
-    e.preventDefault();
-  };
+  const imageList = ref(storage, "images/");
+  const textList = ref(storage, "text/");
+  useEffect(() => {
+    listAll(imageList).then((res)=>{
+      res.items.forEach((item)=>{
+        getDownloadURL(item).then((url)=>{
+          setImgUrls((prev)=>[...prev, url]);
+        })
+      });
+      listAll(textList).then((response)=>{
+        response.items.forEach((data)=>{
+          getDownloadURL(data).then((uri)=>{
+            setTextUrls((obj)=>[...obj,uri]);
+          })
+        })
+      })
+      console.log(imgUrls);
+      console.log(textUrls);
+    })
+  }, []);
 
   return (
     <div className={styles.post_page}>
       <PostSend></PostSend>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
+
     </div>
   );
 };
