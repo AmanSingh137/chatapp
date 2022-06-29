@@ -1,31 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { storage } from "../firebase";
-import { ref, uploadBytes, uploadString } from "firebase/storage";
-import { v4 } from "uuid";
+import React, { useState, useEffect, useRef } from "react";
+import firebase from "firebase/compat/app";
 import styles from "../css/PostSend.module.css";
+import { db } from "../firebase";
+import { useSelector } from "react-redux";
 function PostSend() {
-  const [imageUpload, setImageUpload] = useState(null);
-  const [text, setText] = useState("");
+  const { user } = useSelector((store) => store.auth);
+  const ref = useRef();
+  const [currentImage, setCurrImage] = useState(null);
+  const [caption, setCaption] = useState("");
 
-  const submitHandler = () => {
-    if (text.length === 0) {
-      alert("Please enter some text!");
-      return;
-    }
-    if (imageUpload !== null) {
-      const imgId = v4();
-      const imageRef = ref(storage, `images/${imgId}`);
-      uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        console.log("image uploaded");
-        const textRef = ref(storage, `text/${imgId}`);
-        uploadString(textRef, text, "raw").then((snapshot) => {
-          console.log("Text sent");
-        })
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (caption !== "") {
+      await db.collection("posts").add({
+        caption,
+        photo: currentImage,
+        creatorName: user?.username,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
-      setImageUpload(null);
-      setText("");
+
+      if (ref.current.value) {
+        ref.current.value = null;
+      }
+      setCurrImage(null);
+      setCaption("");
     }
-  }
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setCurrImage(base64);
+  };
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   return (
     <div className={styles.post_container}>
@@ -34,26 +54,27 @@ function PostSend() {
 
         <div className={styles.post_header_txt}>
           <div className={styles.post_input}>
-            <input placeholder="Say Something" onChange={(e) => {
-              setText(e.target.value);
-            }} value={text} />
+            <input
+              placeholder="Say Something"
+              onChange={(e) => {
+                setCaption(e.target.value);
+              }}
+              value={caption}
+            />
           </div>
         </div>
       </div>
 
       <div className={styles.post_react}>
         <div className={styles.post_react_container}>
-          <input type="file" onChange={(e) => {
-            //console.log(e.target.files[0]);
-            setImageUpload(e.target.files[0]);
-          }}
-          //value={imageUpload}
-          />
+          <input type="file" ref={ref} onChange={uploadImage} />
         </div>
 
         {/* <div className={styles.post_react_container}>Video</div> */}
 
-        <div className={styles.post_react_container} onClick={submitHandler}>Submit</div>
+        <div className={styles.post_react_container} onClick={submitHandler}>
+          Submit
+        </div>
       </div>
     </div>
   );

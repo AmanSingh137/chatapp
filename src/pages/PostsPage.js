@@ -2,42 +2,37 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../css/PostPage.module.css";
 import PostSend from "../components/PostSend";
-import {
-  ref,
-  getDownloadURL,
-  listAll,
-} from "firebase/storage";
-import { storage } from "../firebase";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
+// import { storage } from "../firebase";
 
 const PostsPage = () => {
   const [imgUrls, setImgUrls] = useState([]);
   const [textUrls, setTextUrls] = useState([]);
 
-  const imageList = ref(storage, "images/");
-  const textList = ref(storage, "text/");
-  useEffect(() => {
-    listAll(imageList).then((res)=>{
-      res.items.forEach((item)=>{
-        getDownloadURL(item).then((url)=>{
-          setImgUrls((prev)=>[...prev, url]);
-        })
-      });
-      listAll(textList).then((response)=>{
-        response.items.forEach((data)=>{
-          getDownloadURL(data).then((uri)=>{
-            setTextUrls((obj)=>[...obj,uri]);
-          })
-        })
-      })
-      console.log(imgUrls);
-      console.log(textUrls);
-    })
-  }, []);
+  // const imageList = ref(storage, "images/");
+  // const textList = ref(storage, "text/");
+  // useEffect(() => {
+  //   listAll(imageList).then((res) => {
+  //     res.items.forEach((item) => {
+  //       getDownloadURL(item).then((url) => {
+  //         setImgUrls((prev) => [...prev, url]);
+  //       });
+  //     });
+  //     listAll(textList).then((response) => {
+  //       response.items.forEach((data) => {
+  //         getDownloadURL(data).then((uri) => {
+  //           setTextUrls((obj) => [...obj, uri]);
+  //         });
+  //       });
+  //     });
+  //     console.log(imgUrls);
+  //     console.log(textUrls);
+  //   });
+  // }, []);
 
   return (
     <div className={styles.post_page}>
       <PostSend></PostSend>
-
     </div>
   );
 };
