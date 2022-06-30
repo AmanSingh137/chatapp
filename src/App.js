@@ -18,7 +18,7 @@ function App() {
   const { currentTheme } = useSelector((store) => store.theme);
   const { user } = useSelector((store) => store.auth);
   return (
-    <Suspense>
+    <Suspense fallback={<h1>loading</h1>}>
       <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
         <BrowserRouter>
           <Routes>
