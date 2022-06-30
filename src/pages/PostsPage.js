@@ -3,6 +3,7 @@ import styled from "styled-components";
 import styles from "../css/PostPage.module.css";
 import PostSend from "../components/PostSend";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
+import Post from "../components/Post";
 // import { storage } from "../firebase";
 
 const PostsPage = () => {
@@ -33,6 +34,8 @@ const PostsPage = () => {
   return (
     <div className={styles.post_page}>
       <PostSend></PostSend>
+
+      <Post></Post>
     </div>
   );
 };
