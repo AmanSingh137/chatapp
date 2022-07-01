@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../css/PostPage.module.css";
+// import Post from "../components/Post";
 import PostSend from "../components/PostSend";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
 import Post from "../components/Post";
 // import { storage } from "../firebase";
+//import { doc, getDoc } from "firebase/firestore";
+// import { ref, getDownloadURL, listAll } from "firebase/storage";
+import { storage, db } from "../firebase";
 
 const PostsPage = () => {
-  const [imgUrls, setImgUrls] = useState([]);
-  const [textUrls, setTextUrls] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [state, setState] = useState(0);
+  //const docRef = doc(db, "posts", "SF");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
+  const fetchData = () => {
+    db.collection("posts")
+      .get()
+      .then((q) => {
+        q.forEach((e) => {
+          let obj = e.data();
+          setPosts((item) => [...item, obj]);
+          //console.log(posts)
+        });
+      });
+  };
   // const imageList = ref(storage, "images/");
   // const textList = ref(storage, "text/");
   // useEffect(() => {
@@ -34,8 +53,10 @@ const PostsPage = () => {
   return (
     <div className={styles.post_page}>
       <PostSend></PostSend>
-
-      <Post></Post>
+      {posts.map((item) => {
+        //setState(state+1);
+        return <Post key={1 + state} />;
+      })}
     </div>
   );
 };

@@ -16,6 +16,7 @@ function PostSend() {
         caption,
         photo: currentImage,
         creatorName: user?.username,
+        // uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
