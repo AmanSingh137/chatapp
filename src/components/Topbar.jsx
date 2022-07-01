@@ -17,6 +17,12 @@ const Topbar = () => {
           </Link>
         </button>
 
+        <button>
+          <Link to="/chats" style={{ textDecoration: "none" }}>
+            Chats
+          </Link>
+        </button>
+
         <button
           onClick={() => {
             dispatch(logout());
