@@ -1,6 +1,7 @@
-const login = async (username) => {
+const user1 = "";
+const login = async (user) => {
   const userObj = {
-    username: username,
+    username: user === null ? user1 : user.displayName,
   };
   localStorage.setItem("currentUser", JSON.stringify(userObj));
   return userObj;

@@ -10,13 +10,6 @@ const firebaseApp = firebase.initializeApp({
   messagingSenderId: "785427877271",
   appId: "1:785427877271:web:d620bcbd5e5302c68f08d2",
   measurementId: "G-0Q98PRV12K",
-  // apiKey: process.env.FIRE_KEY,
-  // authDomain: process.env.FIRE_DOMAIN,
-  // projectId: "dummy-project-7d371",
-  // storageBucket: "dummy-project-7d371.appspot.com",
-  // messagingSenderId: process.env.FIRE_SENDER,
-  // appId: process.env.FIRE_APPID,
-  // measurementId: "G-0Q98PRV12K",
 });
 
 // Initialize Firebase

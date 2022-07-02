@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
@@ -18,9 +18,9 @@ const PostsPage = React.lazy(() => import("./pages/PostsPage"));
 
 function App() {
   const { currentTheme } = useSelector((store) => store.theme);
-  // const { user } = useSelector((store) => store.auth);
+  //const { user } = useSelector((store) => store.auth);
   const [user] = useAuthState(auth);
-  console.log(user);
+  // console.log(user);
   return (
     <Suspense fallback={<h1>loading</h1>}>
       <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
@@ -31,19 +31,16 @@ function App() {
                 <Route path="/" element={<Navigate to={"/chats"} />} />
               )} */}
 
-            {/* <Route path="/login" element={<LoginPage />}></Route> */}
-            <Route path="/" element={<DefaultLayout />}>
+            <Route exact="/" path="/login" element={<LoginPage />}></Route>
+            {/* <Route path="/" element={<DefaultLayout />}> */}
               <Route path="/chats" element={<ChatPage />}></Route>
               <Route path="/posts" element={<PostsPage />}></Route>
-            </Route>
             {/* </Route> */}
-
-            <Route path="/login" element={<LoginPage />} />
-            <Navigate to={user ? "/chats" : "/login"} />
-            {/* <Route
+            {/* </Route> */}
+            <Route
               path="/"
               element={<Navigate to={user ? "/chats" : "/login"} />}
-            /> */}
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
