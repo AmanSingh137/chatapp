@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SignOut from "./SignOut";
+// import SignOut from "./SignOut";
 
 function NavBar() {
   return (
@@ -12,9 +12,7 @@ function NavBar() {
 
         <h1>ChatAtCampus</h1>
       </div>
-      <div className="nav-right">
-        <SignOut />
-      </div>
+      <div className="nav-right">{/* <SignOut /> */}</div>
     </Nav>
   );
 }

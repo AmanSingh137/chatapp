@@ -33,14 +33,16 @@ function App() {
 
             <Route exact="/" path="/login" element={<LoginPage />}></Route>
             {/* <Route path="/" element={<DefaultLayout />}> */}
-              <Route path="/chats" element={<ChatPage />}></Route>
-              <Route path="/posts" element={<PostsPage />}></Route>
+            <Route path="/chats" element={<ChatPage />}></Route>
+            <Route path="/posts" element={<PostsPage />}></Route>
             {/* </Route> */}
             {/* </Route> */}
-            <Route
+            {/* <Route
               path="/"
               element={<Navigate to={user ? "/chats" : "/login"} />}
-            />
+            /> */}
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/login/chats" element={<ChatPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

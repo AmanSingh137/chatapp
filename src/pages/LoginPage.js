@@ -99,15 +99,15 @@ function LoginPage() {
     (store) => store.auth
   );
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [user] = useAuthState(auth);
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(`/${user?.role}`);
-    }
-  }, [ isError, isSuccess, message, navigate, dispatch]);
-  
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     navigate(`/${user?.role}`);
+  //   }
+  // }, [ isError, isSuccess, message, navigate, dispatch]);
+
   return (
     <>
       <SignInPage>
@@ -116,7 +116,10 @@ function LoginPage() {
           onClick={() => {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider);
-            dispatch(login(user));
+            // dispatch(login(user));
+            {
+              user && navigate("/chats");
+            }
           }}
         >
           <img src="https://img.icons8.com/color/344/google-logo.png"></img>
