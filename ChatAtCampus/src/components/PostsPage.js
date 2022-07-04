@@ -52,17 +52,28 @@ const PostsPage = () => {
   // }, []);
 
   return (
-    <div className={styles.post_page}>
-      <PostSend></PostSend>
-      {posts.map((item) => {
-        //setState(state+1);
-        return <Post key={1 + state} />;
-      })}
-    </div>
+    <Wrapper>
+      <div className={styles.post_page}>
+        <PostSend></PostSend>
+        {posts.map((item) => {
+          //setState(state+1);
+          console.log(posts);
+          return <Post key={1 + state} />;
+        })}
+      </div>
+    </Wrapper>
   );
 };
 
 export default PostsPage;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  background-color: #748da6;
+  /* width: 80%; */
+  height: 85%;
+  overflow-y: scroll;
+`;
 
 const PostsBar = styled.div`
   background-color: grey;
