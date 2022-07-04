@@ -2,24 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import styles from "../css/PostSend.module.css";
 import { auth, db } from "../firebase";
-// import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 function PostSend() {
-  // const { user } = useSelector((store) => store.auth);
   const [user] = useAuthState(auth);
   const ref = useRef();
   const [currentImage, setCurrImage] = useState(null);
   const [caption, setCaption] = useState("");
-
+  const {uid, photoURL} = auth.currentUser;
   const submitHandler = async (e) => {
     e.preventDefault();
     if (caption !== "") {
+      console.log(caption, uid, photoURL);
       await db.collection("posts").add({
         caption,
         photo: currentImage,
-        creatorName: user?.username,
-        // uid,
+        uid, 
+        name: user.displayName,
+        photoURL,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
 
@@ -54,7 +54,7 @@ function PostSend() {
   return (
     <div className={styles.post_container}>
       <div className={styles.post_header}>
-        <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
+        <img src={photoURL} />
 
         <div className={styles.post_header_txt}>
           <div className={styles.post_input}>
@@ -73,8 +73,6 @@ function PostSend() {
         <div className={styles.post_react_container}>
           <input type="file" ref={ref} onChange={uploadImage} />
         </div>
-
-        {/* <div className={styles.post_react_container}>Video</div> */}
 
         <div className={styles.post_react_container} onClick={submitHandler}>
           Submit

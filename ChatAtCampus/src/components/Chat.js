@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { auth, db } from "../firebase";
 import SendMessage from "./SendMessage";
-// import NavBar from "./NavBar";
 import styled from "styled-components";
-// import SignOut from "./SignOut";
-//import "./Chat.css";
 
 const Chat = () => {
   const scroll = useRef();
@@ -21,10 +18,6 @@ const Chat = () => {
   console.log(messages);
   return (
     <Wrapper>
-      {/* <div className="navbar">
-        <NavBar />
-      </div> */}
-
       <div className="container">
         <div className="texts">
           {messages.map(({ id, text, photoURL, uid }) => {
@@ -55,7 +48,6 @@ export default Chat;
 const Wrapper = styled.div`
   margin: 0 auto;
   background-color: #748da6;
-  /* width: 80%; */
   height: 85%;
 
   .navbar {
@@ -65,10 +57,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* overflow-y: scroll; */
     padding: 10px;
     height: 100%;
-    //margin: 10vh 0 10vh;
 
     .texts {
       display: flex;
@@ -92,7 +82,6 @@ const Wrapper = styled.div`
           max-width: 500px;
           margin-left: 5px;
           margin-bottom: 12px;
-          /* line-height: 24px; */
           padding: 10px 20px;
           position: relative;
           background: white;
@@ -105,7 +94,6 @@ const Wrapper = styled.div`
 
       .sent p {
         margin-right: 5px;
-        /* color: white; */
         background: #ef9f9f;
         align-self: flex-end;
       }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import firebase from "firebase/compat/app";
-// import "./SendMessage.css";
 import styled from "styled-components";
 
 const SendMessage = ({ scroll }) => {
@@ -33,14 +32,12 @@ const SendMessage = ({ scroll }) => {
             type="text"
           />
         </div>
-        {/* <button type=""> */}
         <img
           onClick={sendMessage}
           src="https://www.svgrepo.com/show/258748/send.svg"
           alt=""
           srcset=""
         />
-        {/* </button> */}
       </form>
     </Wrapper>
   );
